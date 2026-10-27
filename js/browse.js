@@ -70,6 +70,21 @@ breedFilter.addEventListener("change", function() {
 });
 
 function likeDog(name) {
+    let likedDogs = JSON.parse(localStorage.getItem("likedDogs")) || [];
+
+    const dog = dogs.find(dog => dog.name === name);
+
+    if (!dog) {
+        console.log("Dog not found:", name);
+        return;
+    }
+
+    if (!likedDogs.some(likedDog => likedDog.name === name)) {
+        likedDogs.push(dog);
+        localStorage.setItem("likedDogs", JSON.stringify(likedDogs));
+    }
+
+    console.log("Saved dogs:", localStorage.getItem("likedDogs"));
     alert("You liked " + name + "!");
 }
 
