@@ -86,8 +86,21 @@ function likeDog(name) {
 
     console.log("Saved dogs:", localStorage.getItem("likedDogs"));
     alert("You liked " + name + "!");
+    removeDog(name);
 }
+
+let removedDogs = [];
 
 function passDog(name) {
     alert("You passed on " + name + ".");
+    removeDog(name);
+}
+
+function removeDog(name) {
+    const dogIndex = dogs.findIndex(dog => dog.name === name);
+    if (dogIndex !== -1) {
+        dogs.splice(dogIndex, 1);
+        displayDogs(dogs);
+    }
+    removedDogs.push(name);
 }
