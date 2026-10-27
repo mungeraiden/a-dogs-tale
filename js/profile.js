@@ -12,10 +12,16 @@ dogForm.addEventListener('submit', function(event) {
     const bio = document.getElementById('bio').value;
 
     profileOutput.innerHTML = `
-        <h2>${name}'s Profile</h2>
-        <p><strong>Breed:</strong> ${breed}</p>
-        <p><strong>Age:</strong> ${age}</p>
-        <p><strong>Location:</strong> ${location}</p>
-        <p><strong>Bio:</strong> ${bio}</p>
+        <div class="card dog-card">
+            <h2>🐶 ${name}'s Profile</h2>
+
+            <p><strong>Breed:</strong> ${breed}</p>
+            <p><strong>Age:</strong> ${age}</p>
+            <p><strong>Location:</strong> ${location}</p>
+            <p><strong>Bio:</strong> ${bio}</p>
+        </div>
     `;
+
+
+    dogForm.reset();
 });
