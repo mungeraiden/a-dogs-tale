@@ -42,8 +42,13 @@ main {
     border-radius: 12px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     padding: 25px;
+    transition: transform 0.3s ease;
 }
 
+.card:hover {
+  /* 2. Scale up (1.1 = 110% of its original size) */
+  transform: scale(1.1); 
+}
 /* Profile Form Card */
 
 .form-card {
