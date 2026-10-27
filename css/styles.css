@@ -1,20 +1,107 @@
+/* General Page Styling */
+
 body {
+    margin: 0;
+    font-family: Arial, sans-serif;
     background-color: #FAF3E0;
     color: #355E3B;
-    font-family: Arial, sans-serif;
-    margin: 0;
 }
+
+/* Header */
 
 header {
     background-color: #355E3B;
     color: white;
     text-align: center;
-    padding: 30px;
+    padding: 40px;
 }
+
+header h1 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+header p {
+    margin-top: 10px;
+}
+
+/* Main Content */
+
+main {
+    display: flex;
+    gap: 30px;
+    padding: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* Cards */
+
+.card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    padding: 25px;
+}
+
+/* Profile Form Card */
+
+.form-card {
+    width: 250px;
+}
+
+/* Profile Output */
+
+#profileOutput {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Form Elements */
+
+label {
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* Buttons */
+
+button {
+    background-color: #E07A5F;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #c9664d;
+}
+
+/* Homepage */
 
 .welcome {
     text-align: center;
-    margin: 30px;
+    width: 100%;
 }
 
 .menu {
@@ -22,28 +109,50 @@ header {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding: 20px;
+
+    width: 100%;
 }
 
-.card {
-    background-color: white;
+.menu .card {
     width: 250px;
-    padding: 20px;
-    border-radius: 10px;
     text-align: center;
-
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-button {
-    background-color: #E07A5F;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+/* Dog Cards */
+
+.dog-card {
+    max-width: 500px;
 }
 
-button:hover {
-    background-color: #c9664d;
+.dog-card h2 {
+    margin-top: 0;
+}
+
+/* Navigation Button */
+
+.home-btn {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    main {
+        flex-direction: column;
+    }
+
+    .form-card {
+        width: 100%;
+    }
+
+    #profileOutput {
+        width: 100%;
+    }
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile | A Dog's Tale</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Create Your Dog Profile</h1>
+    </header>
+
+    <main>
+
+        <div class="card">
+
+            <h2>Dog Information</h2>
+
+            <form id="dogForm">
+
+                <label>Dog Name</label><br>
+                <input type="text" id="name" required><br><br>
+
+                <label>Breed</label><br>
+                <input type="text" id="breed" required><br><br>
+
+                <label>Age</label><br>
+                <input type="number" id="age" required><br><br>
+
+                <label>Location</label><br>
+                <input type="text" id="location" required><br><br>
+
+                <label>Bio</label><br>
+                <textarea id="bio"></textarea><br><br>
+
+                <button type="submit">Create Profile</button>
+
+            </form>
+
+        </div>
+
+        <div id="profileOutput"></div>
+
+    </main>
+
+    <script src="js/profile.js"></script>
+
+</body>
+</html>
