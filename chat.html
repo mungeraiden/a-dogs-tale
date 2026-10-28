@@ -7,20 +7,44 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
     <header>
-        <h1>Chat with Owners</h1>
-        <p>Connect with other dog owners and chat about your furry friends.</p>
+        <h1>A Dog's Tale</h1>
+        <p>Chat with fellow dog lovers!</p>
     </header>
 
-    <main>
-        <div class="chat-container">
-            <div class="chat-box" id="chatBox"></div>
-            <input type="text" id="messageInput" placeholder="Type your message...">
-            <button id="sendButton">Send</button>
-        </div>
+    <nav>
+        <a href="browse.html">Browse Dogs</a>
+        <a href="matches.html">❤️ My Matches</a>
+        <a href="chat.html">💬 Chat</a>
+        <a href="index.html">Add Dog</a>
+    </nav>
+
+    <main class="chat-container">
+
+        <section class="conversation-list">
+            <h2>Conversations</h2>
+        </section>
+
+        <section class="chat-window">
+            <h2 id="chatTitle">Select a conversation</h2>
+
+            <div id="messages" class="messages"></div>
+
+            <form id="messageForm" class="message-form">
+                <input
+                    type="text"
+                    id="messageInput"
+                    placeholder="Type a message..."
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit">Send</button>
+            </form>
+        </section>
 
     </main>
 
-    
+    <script src="js/chat.js"></script>
 </body>
 </html>
