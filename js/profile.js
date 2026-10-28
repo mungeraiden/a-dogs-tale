@@ -1,18 +1,18 @@
-const dogForm = document.getElementById('dogForm');
-const profileOutput = document.getElementById('profileOutput');
+const dogForm = document.getElementById("dogForm");
+const profileOutput = document.getElementById("profileOutput");
 
 let editingProfile = false;
 
-dogForm.addEventListener('submit', function(event) {
-    event.preventDefault();
+dogForm.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const breed = document.getElementById('breed').value;
-    const age = document.getElementById('age').value;
-    const location = document.getElementById('location').value;
-    const bio = document.getElementById('bio').value;
+  const name = document.getElementById("name").value;
+  const breed = document.getElementById("breed").value;
+  const age = document.getElementById("age").value;
+  const location = document.getElementById("location").value;
+  const bio = document.getElementById("bio").value;
 
-    profileOutput.innerHTML = `
+  profileOutput.innerHTML = `
         <div class="card dog-card">
             <h2>🐶 ${name}'s Profile</h2>
 
@@ -25,46 +25,54 @@ dogForm.addEventListener('submit', function(event) {
         </div>
     `;
 
-    dogForm.reset();
+  dogForm.reset();
 
-    if (editingProfile) {
-        editingProfile = false;
-        dogForm.querySelector('button[type="submit"]').textContent = 'Create Profile';
-    }
+  if (editingProfile) {
+    editingProfile = false;
+    dogForm.querySelector('button[type="submit"]').textContent =
+      "Create Profile";
+  }
 });
 
-profileOutput.addEventListener('click', function(event) {
+profileOutput.addEventListener("click", function (event) {
+  if (event.target.id === "editProfile") {
+    const profile = event.target.parentElement;
 
-    if (event.target.id === 'editProfile') {
+    const name = profile
+      .querySelector("h2")
+      .textContent.replace("🐶 ", "")
+      .replace("'s Profile", "");
 
-        const profile = event.target.parentElement;
+    const breed = profile
+      .querySelectorAll("p")[0]
+      .textContent.replace("Breed:", "")
+      .trim();
 
-        const name = profile.querySelector('h2').textContent
-            .replace("🐶 ", "")
-            .replace("'s Profile", "");
+    const age = profile
+      .querySelectorAll("p")[1]
+      .textContent.replace("Age:", "")
+      .trim();
 
-        const breed = profile.querySelectorAll('p')[0].textContent
-            .replace("Breed:", "").trim();
+    const location = profile
+      .querySelectorAll("p")[2]
+      .textContent.replace("Location:", "")
+      .trim();
 
-        const age = profile.querySelectorAll('p')[1].textContent
-            .replace("Age:", "").trim();
+    const bio = profile
+      .querySelectorAll("p")[3]
+      .textContent.replace("Bio:", "")
+      .trim();
 
-        const location = profile.querySelectorAll('p')[2].textContent
-            .replace("Location:", "").trim();
+    document.getElementById("name").value = name;
+    document.getElementById("breed").value = breed;
+    document.getElementById("age").value = age;
+    document.getElementById("location").value = location;
+    document.getElementById("bio").value = bio;
 
-        const bio = profile.querySelectorAll('p')[3].textContent
-            .replace("Bio:", "").trim();
+    dogForm.querySelector('button[type="submit"]').textContent = "Save Changes";
 
-        document.getElementById('name').value = name;
-        document.getElementById('breed').value = breed;
-        document.getElementById('age').value = age;
-        document.getElementById('location').value = location;
-        document.getElementById('bio').value = bio;
+    editingProfile = true;
 
-        dogForm.querySelector('button[type="submit"]').textContent = 'Save Changes';
-
-        editingProfile = true;
-
-        dogForm.scrollIntoView({ behavior: 'smooth' });
-    }
+    dogForm.scrollIntoView({ behavior: "smooth" });
+  }
 });

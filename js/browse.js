@@ -1,28 +1,28 @@
 const dogs = [
-    {
-        name: "Bella",
-        breed: "Golden Retriever",
-        age: 3,
-        location: "Spokane"
-    },
-    {
-        name: "Max",
-        breed: "Husky",
-        age: 2,
-        location: "Seattle"
-    },
-    {
-        name: "Luna",
-        breed: "Labrador",
-        age: 4,
-        location: "Boise"
-    },
-    {
-        name: "Charlie",
-        breed: "German Shepherd",
-        age: 5,
-        location: "Portland"
-    }
+  {
+    name: "Bella",
+    breed: "Golden Retriever",
+    age: 3,
+    location: "Spokane",
+  },
+  {
+    name: "Max",
+    breed: "Husky",
+    age: 2,
+    location: "Seattle",
+  },
+  {
+    name: "Luna",
+    breed: "Labrador",
+    age: 4,
+    location: "Boise",
+  },
+  {
+    name: "Charlie",
+    breed: "German Shepherd",
+    age: 5,
+    location: "Portland",
+  },
 ];
 console.log("browse.js loaded");
 
@@ -30,12 +30,10 @@ const dogsContainer = document.getElementById("dogsContainer");
 const breedFilter = document.getElementById("breedFilter");
 
 function displayDogs(dogsToDisplay) {
+  dogsContainer.innerHTML = "";
 
-    dogsContainer.innerHTML = "";
-
-    dogsToDisplay.forEach(dog => {
-
-        dogsContainer.innerHTML += `
+  dogsToDisplay.forEach((dog) => {
+    dogsContainer.innerHTML += `
             <div class="card dog-card">
                 <h2>🐶 ${dog.name}</h2>
 
@@ -48,59 +46,56 @@ function displayDogs(dogsToDisplay) {
 
             </div>
         `;
-    });
+  });
 }
 
 displayDogs(dogs);
 
-breedFilter.addEventListener("change", function() {
+breedFilter.addEventListener("change", function () {
+  const selectedBreed = breedFilter.value;
 
-    const selectedBreed = breedFilter.value;
+  if (selectedBreed === "all") {
+    displayDogs(dogs);
+    return;
+  }
 
-    if (selectedBreed === "all") {
-        displayDogs(dogs);
-        return;
-    }
+  const filteredDogs = dogs.filter((dog) => dog.breed === selectedBreed);
 
-    const filteredDogs = dogs.filter(
-        dog => dog.breed === selectedBreed
-    );
-
-    displayDogs(filteredDogs);
+  displayDogs(filteredDogs);
 });
 
 function likeDog(name) {
-    let likedDogs = JSON.parse(localStorage.getItem("likedDogs")) || [];
+  let likedDogs = JSON.parse(localStorage.getItem("likedDogs")) || [];
 
-    const dog = dogs.find(dog => dog.name === name);
+  const dog = dogs.find((dog) => dog.name === name);
 
-    if (!dog) {
-        console.log("Dog not found:", name);
-        return;
-    }
+  if (!dog) {
+    console.log("Dog not found:", name);
+    return;
+  }
 
-    if (!likedDogs.some(likedDog => likedDog.name === name)) {
-        likedDogs.push(dog);
-        localStorage.setItem("likedDogs", JSON.stringify(likedDogs));
-    }
+  if (!likedDogs.some((likedDog) => likedDog.name === name)) {
+    likedDogs.push(dog);
+    localStorage.setItem("likedDogs", JSON.stringify(likedDogs));
+  }
 
-    console.log("Saved dogs:", localStorage.getItem("likedDogs"));
-    alert("You liked " + name + "!");
-    removeDog(name);
+  console.log("Saved dogs:", localStorage.getItem("likedDogs"));
+  alert("You liked " + name + "!");
+  removeDog(name);
 }
 
 let removedDogs = [];
 
 function passDog(name) {
-    alert("You passed on " + name + ".");
-    removeDog(name);
+  alert("You passed on " + name + ".");
+  removeDog(name);
 }
 
 function removeDog(name) {
-    const dogIndex = dogs.findIndex(dog => dog.name === name);
-    if (dogIndex !== -1) {
-        dogs.splice(dogIndex, 1);
-        displayDogs(dogs);
-    }
-    removedDogs.push(name);
+  const dogIndex = dogs.findIndex((dog) => dog.name === name);
+  if (dogIndex !== -1) {
+    dogs.splice(dogIndex, 1);
+    displayDogs(dogs);
+  }
+  removedDogs.push(name);
 }

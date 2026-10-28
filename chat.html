@@ -1,51 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat | A Dog's Tale</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
     <nav>
-        <a href="browse.html">Browse Dogs</a>
-        <a href="matches.html">❤️ My Matches</a>
-        <a href="chat.html">💬 Chat</a>
-        <a href="index.html">Add Dog</a>
+      <a href="browse.html">🌐 Browse Dogs</a>
+      <a href="matches.html">❤️ My Matches</a>
+      <a href="chat.html">💬 Chat</a>
+      <a href="index.html">🔎 Add Dog</a>
     </nav>
 
     <header>
-        <h1>A Dog's Tale</h1>
-        <p>Chat with fellow dog lovers!</p>
+      <h1>A Dog's Tale</h1>
+      <p>Chat with fellow dog lovers!</p>
     </header>
 
-
     <main class="chat-container">
+      <section class="conversation-list">
+        <h2>Conversations</h2>
+      </section>
 
-        <section class="conversation-list">
-            <h2>Conversations</h2>
-        </section>
+      <section class="chat-window">
+        <h2 id="chatTitle">Select a conversation</h2>
 
-        <section class="chat-window">
-            <h2 id="chatTitle">Select a conversation</h2>
+        <div id="messages" class="messages"></div>
 
-            <div id="messages" class="messages"></div>
-
-            <form id="messageForm" class="message-form">
-                <input
-                    type="text"
-                    id="messageInput"
-                    placeholder="Type a message..."
-                    autocomplete="off"
-                    required
-                >
-                <button type="submit">Send</button>
-            </form>
-        </section>
-
+        <form id="messageForm" class="message-form">
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="Type a message..."
+            autocomplete="off"
+            required
+          />
+          <button type="submit">Send</button>
+        </form>
+      </section>
     </main>
 
     <script src="js/chat.js"></script>
-</body>
+  </body>
 </html>
