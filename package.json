@@ -1,0 +1,30 @@
+{
+  "name": "a-dogs-tale",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+"scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mungeraiden/a-dogs-tale.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mungeraiden/a-dogs-tale/issues"
+  },
+  "homepage": "https://github.com/mungeraiden/a-dogs-tale#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.24.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
