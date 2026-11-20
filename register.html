@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | A Dog's Tale</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <main class="login-container">
+        <h1>🐶 A Dog's Tale</h1>
+        <h2>Create an Account</h2>
+        <p>Join A Dog's Tale today!</p>
+
+        <form id="registerForm">
+            <input
+                type="email"
+                id="email"
+                placeholder="Email Address"
+                required
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                minlength="8"
+                required
+            >
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                required
+            >
+
+            <button type="submit">Create Account</button>
+        </form>
+
+        <p id="registerMessage"></p>
+
+        <p>Already have an account?
+            <a href="login.html">Log In</a>
+        </p>
+    </main>
+
+    <script src="js/register.js"></script>
+</body>
+</html>

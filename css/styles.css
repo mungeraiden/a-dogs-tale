@@ -248,3 +248,57 @@ nav a:hover {
   color: white;
   align-self: flex-end;
 }
+
+/* Login Page */
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 350px;
+    max-width: calc(100% - 40px);
+    margin: 80px auto;
+    padding: 35px;
+
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+
+    text-align: center;
+}
+
+.login-container h1 {
+    color: #355e3b;
+    margin-bottom: 10px;
+}
+
+.login-container h2 {
+    margin-bottom: 5px;
+}
+
+.login-container p {
+    color: #666;
+}
+
+#loginForm {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#loginForm input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#loginForm button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+}
+
+#loginMessage {
+    font-weight: bold;
+    margin-top: 15px;
+}
