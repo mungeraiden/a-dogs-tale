@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS dogs (
     name VARCHAR(100) NOT NULL,
     breed VARCHAR(100),
     age INT UNSIGNED,
+    location VARCHAR(100),
     bio TEXT,
     photo_url VARCHAR(500),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
