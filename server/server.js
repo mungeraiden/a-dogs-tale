@@ -2,18 +2,26 @@ const express = require('express');
 const dotenv = require('dotenv');
 const authenticateToken = require('./middleware/auth');
 const dogsRoutes = require('./routes/dogs');
+const interactionsRoutes = require('./routes/interactions');
+const matchesRoutes = require('./routes/matches');
+const path = require('path');
 
 dotenv.config();
 
 const authRoutes = require('./routes/auth');
 
 const app = express();
+app.use(express.static('public'));
+app.use(express.static('..'));
 const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/dogs', dogsRoutes);
+app.use('/api/interactions', interactionsRoutes);
+app.use('/api/matches', matchesRoutes);
+app.use(express.static(path.join(__dirname, '..')));
 
 // Routes
 app.use('/api/auth', authRoutes);

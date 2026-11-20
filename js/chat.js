@@ -1,94 +1,91 @@
+const API_URL = "http://localhost:3000/api";
+const MATCH_ID = 1;
+
 const messagesContainer = document.getElementById("messages");
 const messageForm = document.getElementById("messageForm");
 const messageInput = document.getElementById("messageInput");
 const chatTitle = document.getElementById("chatTitle");
 const conversationList = document.querySelector(".conversation-list");
 
-let currentConversation = 0;
+const token = localStorage.getItem("token");
 
-// Load dogs the user has liked.
-const likedDogs = JSON.parse(localStorage.getItem("likedDogs")) || [];
+async function loadMessages() {
+  try {
+    const response = await fetch(
+      `${API_URL}/matches/${MATCH_ID}/messages`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-// Create a conversation for each liked dog.
-const conversations = likedDogs.map((dog) => ({
-  name: dog.name + "'s Owner",
-  messages: [
-    {
-      text: `Hi! Thanks for checking out ${dog.name}!`,
-      type: "received",
-    },
-    {
-      text: `${dog.name} is a ${dog.breed || "lovely dog"}${dog.age ? ", " + dog.age + " years old" : ""}${dog.location ? " from " + dog.location : ""}.`,
-      type: "received",
-    },
-    {
-      text: `I'd love to tell you more about ${dog.name}!`,
-      type: "received",
-    },
-  ],
-}));
+    if (!response.ok) {
+      throw new Error("Could not load messages.");
+    }
 
-function displayConversations() {
-  conversationList.innerHTML = "<h2>Conversations</h2>";
-
-  if (conversations.length === 0) {
-    conversationList.innerHTML += "<p>Like a dog to start a conversation!</p>";
-    chatTitle.textContent = "No conversations yet";
-    messagesContainer.innerHTML = "";
-    return;
+    const messages = await response.json();
+    displayMessages(messages);
+  } catch (error) {
+    messagesContainer.innerHTML = `<p>${error.message}</p>`;
   }
-
-  conversations.forEach((conversation, index) => {
-    const button = document.createElement("button");
-    button.className = "conversation";
-    button.textContent = "🐶 " + conversation.name;
-    button.addEventListener("click", () => selectConversation(index));
-
-    conversationList.appendChild(button);
-  });
-
-  selectConversation(0);
 }
 
-function selectConversation(index) {
-  currentConversation = index;
-
-  document.querySelectorAll(".conversation").forEach((button, i) => {
-    button.classList.toggle("active", i === index);
-  });
-
-  chatTitle.textContent = conversations[index].name;
-  displayMessages();
-}
-
-function displayMessages() {
+function displayMessages(messages) {
   messagesContainer.innerHTML = "";
 
-  conversations[currentConversation].messages.forEach((message) => {
+  messages.forEach((message) => {
     const messageElement = document.createElement("p");
-    messageElement.classList.add(message.type);
-    messageElement.textContent = message.text;
 
+    messageElement.classList.add(
+      message.sender === "You" ? "sent" : "received"
+    );
+
+    messageElement.textContent = message.text;
     messagesContainer.appendChild(messageElement);
   });
 
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-messageForm.addEventListener("submit", function (event) {
+async function sendMessage(event) {
   event.preventDefault();
 
   const messageText = messageInput.value.trim();
 
-  if (!messageText || conversations.length === 0) return;
+  if (!messageText) return;
 
-  conversations[currentConversation].messages.push({
-    text: messageText,
-    type: "sent",
-  });
+  try {
+    const response = await fetch(
+      `${API_URL}/matches/${MATCH_ID}/messages`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ text: messageText }),
+      }
+    );
 
-  messageInput.value = "";
-  displayMessages();
-});
+    if (!response.ok) {
+      throw new Error("Could not send message.");
+    }
 
-displayConversations();
+    messageInput.value = "";
+    await loadMessages();
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+conversationList.innerHTML = `
+  <h2>Conversations</h2>
+  <button class="conversation active">🐶 Buddy's Owner</button>
+`;
+
+chatTitle.textContent = "Buddy's Owner";
+
+messageForm.addEventListener("submit", sendMessage);
+
+loadMessages();

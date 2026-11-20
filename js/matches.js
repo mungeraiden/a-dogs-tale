@@ -1,34 +1,40 @@
+const API_URL = "http://localhost:3000/api";
 const matchesContainer = document.getElementById("matchesContainer");
 
-const likedDogs = JSON.parse(localStorage.getItem("likedDogs")) || [];
-
-function displayMatches() {
+async function displayMatches() {
   matchesContainer.innerHTML = "";
 
-  if (likedDogs.length === 0) {
-    matchesContainer.innerHTML = "<p>You haven't liked any dogs yet.</p>";
-    return;
+  try {
+    const response = await fetch(`${API_URL}/matches`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Could not retrieve matches.");
+    }
+
+    const matches = await response.json();
+
+    if (matches.length === 0) {
+      matchesContainer.innerHTML = "<p>You don't have any matches yet.</p>";
+      return;
+    }
+
+    matches.forEach((match) => {
+      matchesContainer.innerHTML += `
+        <div class="card dog-card">
+          <h2>🐶 ${match.name}</h2>
+          <p><strong>Breed:</strong> ${match.breed}</p>
+          <p><strong>Messages:</strong> ${match.messages.length}</p>
+          <a href="chat.html">Open Conversation</a>
+        </div>
+      `;
+    });
+  } catch (error) {
+    matchesContainer.innerHTML = `<p>${error.message}</p>`;
   }
-
-  likedDogs.forEach((dog) => {
-    matchesContainer.innerHTML += `
-            <div class="card dog-card">
-                <h2>🐶 ${dog.name}</h2>
-                <p><strong>Breed:</strong> ${dog.breed}</p>
-                <p><strong>Age:</strong> ${dog.age}</p>
-                <p><strong>Location:</strong> ${dog.location}</p>
-                <button onclick="removeMatch('${dog.name}')">💔 Remove</button>
-            </div>
-        `;
-  });
-}
-
-function removeMatch(name) {
-  const updatedDogs = likedDogs.filter((dog) => dog.name !== name);
-
-  localStorage.setItem("likedDogs", JSON.stringify(updatedDogs));
-
-  location.reload();
 }
 
 displayMatches();
