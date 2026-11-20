@@ -1,3 +1,4 @@
+-- Stores registered user accounts.
 CREATE TABLE IF NOT EXISTS users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -5,6 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Stores dog profiles belonging to user accounts.
 CREATE TABLE IF NOT EXISTS dogs (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id INT UNSIGNED NOT NULL,
@@ -19,6 +21,7 @@ CREATE TABLE IF NOT EXISTS dogs (
         ON DELETE CASCADE
 );
 
+-- Records when one dog likes another dog.
 CREATE TABLE IF NOT EXISTS likes (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     liker_dog_id INT UNSIGNED NOT NULL,
@@ -36,6 +39,7 @@ CREATE TABLE IF NOT EXISTS likes (
         ON DELETE CASCADE
 );
 
+-- Stores mutual likes between two dogs.
 CREATE TABLE IF NOT EXISTS matches (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     dog_a_id INT UNSIGNED NOT NULL,
@@ -53,6 +57,7 @@ CREATE TABLE IF NOT EXISTS matches (
         ON DELETE CASCADE
 );
 
+-- Stores messages exchanged between matched dogs.
 CREATE TABLE IF NOT EXISTS messages (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     match_id INT UNSIGNED NOT NULL,
