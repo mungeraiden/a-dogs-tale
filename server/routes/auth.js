@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const db = require('../config/database');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const authenticateToken = require('../middleware/auth');
 
 // Register a new user
 router.post('/register', async (req, res) => {
@@ -115,6 +116,42 @@ router.post('/login', async (req, res) => {
 
         res.status(500).json({
             message: 'Something went wrong during login.'
+        });
+    }
+});
+
+// Update user email
+router.put('/account', authenticateToken, async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        if (!email || !email.includes('@')) {
+            return res.status(400).json({
+                message: 'Please provide a valid email address.'
+            });
+        }
+
+        await db.execute(
+            'UPDATE users SET email = ? WHERE id = ?',
+            [email, req.userId]
+        );
+
+        res.json({
+            message: 'Account updated successfully!',
+            email: email
+        });
+
+    } catch (error) {
+        if (error.code === 'ER_DUP_ENTRY') {
+            return res.status(409).json({
+                message: 'That email address is already in use.'
+            });
+        }
+
+        console.error('Account update error:', error);
+
+        res.status(500).json({
+            message: 'Something went wrong while updating your account.'
         });
     }
 });
